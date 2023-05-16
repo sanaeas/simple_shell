@@ -201,3 +201,4 @@ char *update_var(char *value, char **env, int indx)
 
 	free(key);
 	return (modified);
+}

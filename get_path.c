@@ -129,7 +129,7 @@ char *correct_path(char *dir, char *cmd_name)
 	m = 0;
 	while (cmd_name[m])
 	{
-		buf[n++] = cmd_namem[m];
+		buf[n++] = cmd_name[m];
 		m++;
 	}
 	while (n < len)
