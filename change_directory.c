@@ -47,7 +47,8 @@ int change_dir(__attribute__((unused))char *command, char **args, char ***env)
  * @env: The environment variables array.
  * @var: The name of the environment variable to search for.
  *
- * Return: The directory value of the environment variable, or NULL if not found.
+ * Return: The directory value of the environment variable,
+ *		or NULL if not found.
  */
 char *find_dir_val(char **env, char *var)
 {
@@ -69,7 +70,8 @@ char *find_dir_val(char **env, char *var)
 }
 
 /**
- * update_prev_dir - Update the value of the "PWD" environment variable to the current directory.
+ * update_prev_dir - Update the value of the "PWD" environment variable
+ *			to the current directory.
  * @env: The environment variables array.
  *
  * Return: 1 on success, -1 if "PWD" variable is not found.
