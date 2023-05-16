@@ -42,3 +42,38 @@ int setenv_var(char *command, char **args, char ***env)
 
 	return (1);
 }
+
+/**
+ * already_exist - Check if an environment variable already exists
+ *
+ * @var: The variable name to search for
+ * @env: The environment variables
+ *
+ * Return: The index of the variable if found, -1 otherwise
+ */
+int already_exist(char *var, char **env)
+{
+	char *key;
+	int n = 0;
+
+	/* Iterate through each environment variable */
+	while (env[n])
+	{
+		/* Find the variable name */
+		key = find_var(env[n]);
+		if (!key)
+		{
+			perror("Error while looking for the variable");
+			exit(1);
+		}
+		/* Compare the variable name with the one we're searching for */
+		if (!own_strcmp(key, var))
+		{
+			free(key);
+			return (n);
+		}
+		free(key);
+		n++;
+	}
+	return (-1);
+}
