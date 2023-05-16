@@ -45,3 +45,24 @@ char *own_strcpy(char *copy, char *str)
 
 	return (copy);
 }
+
+/**
+ * own_strcmp - Compares two strings lexicographically
+ *
+ * @str1: The first string to compare
+ * @str2: The second string to compare
+ *
+ * Return: An integer less than, equal to, or greater than 0
+ *         if str1 is found, respectively, to be less than, to match,
+ *         or be greater than str2.
+ */
+int own_strcmp(char *str1, char *str2)
+{
+	/* Iterate through each character in the strings while they are equal */
+	while (*str1 && (*str1 == *str2))
+	{
+		str1++;
+		str2++;
+	}
+	return (*(unsigned char*)str1 - *(unsigned char*)str2);
+}
