@@ -58,7 +58,16 @@ char **tokenize_args(char *buf)
 
 	return (args);
 }
-
+/**
+ * exec_cmd - Executes a command with arguments
+ *
+ * @command: The command entered by the user
+ * @args: Array of arguments for the command
+ * @env: Array of environment variables
+ * @exec_file: The executable file path
+ *
+ * Return: 0 on success, 1 on error
+ */
 int exec_cmd(char *command, char **args, char ***env, char *exec_file)
 {
 	char *cmd;
@@ -66,6 +75,7 @@ int exec_cmd(char *command, char **args, char ***env, char *exec_file)
 	int n;
 	int (*fct)(char *, char **, char ***);
 
+	/* Check if any required parameter is missing */
 	if (!command || !args || !env || !exec_file)
 	{
 		perror("An error occurred while executing the command");
@@ -80,6 +90,7 @@ int exec_cmd(char *command, char **args, char ***env, char *exec_file)
 		return (fct(command, args, env));
 
 	temp = args[0];
+	/* Find the executable file path in the environment variables */
 	cmd = track_path(args[0], *env);
 	if (!cmd)
 	{
