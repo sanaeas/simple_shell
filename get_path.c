@@ -68,3 +68,32 @@ char *find_path(char **env)
 		token = NULL;
 	return (token);
 }
+
+/**
+ * cmd_path - Find the correct path for a command within the provided path
+ *
+ * @command: The command to find the path for
+ * @path: The search path containing directories separated by ':'
+ *
+ * Return: the correct path for the command
+ */
+char *cmd_path(char *command, char *path)
+{
+	const char *delimiter;
+	char *token;
+	char *cmd;
+
+	if (command == NULL || path == NULL)
+		exit(1);
+
+	delimiter = ":";
+	token = own_strtok(path, delimiter);
+	while (token)
+	{
+		cmd = correct_path(token, command);
+		if (cmd)
+			return (cmd);
+		token = own_strtok(NULL, delimiter);
+	}
+	return (NULL);
+}
