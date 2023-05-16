@@ -117,3 +117,34 @@ unsigned int add_error_msg(char *buff, char *error, unsigned int n)
 
 	return (n);
 }
+/**
+ * add_more_text - Append additional text into the buffer
+ *
+ * @buff: the buffer where the output string will be stored
+ * @text: the text to add
+ * @indx: character indicating the type of additional text
+ * @n: starting index in the buffer where the text should be added
+ *
+ * Return: index in the buffer after adding the additional text
+ */
+unsigned int add_more_text(char *buff, char *text, char indx,
+unsigned int n)
+{
+	int m = 0;
+
+	if (!text)
+		return (n);
+
+	if (indx != 'c')
+	{
+		buff[n++] = ':';
+		buff[n++] = ' ';
+	}
+	while (text[m])
+	{
+		buff[n++] = text[m];
+		m++;
+	}
+
+	return (n);
+}
