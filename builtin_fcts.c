@@ -1,7 +1,7 @@
 #include "shell_header.h"
 
 /**
- * is_built_in - Check if a command is a built-in command and return its function
+ * is_built_in - Check if a command is a built-in command and return its func
  *
  * @command: The command to check
  *
