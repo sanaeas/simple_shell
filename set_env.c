@@ -117,7 +117,8 @@ char *find_var(char *env_var)
 }
 
 /**
- * create_var - Create a new environment variable with the specified name and value
+ * create_var - Create a new environment variable with the specified
+ *		name and value
  *
  * @env: The current environment variables
  * @name: The name of the variable
