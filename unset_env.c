@@ -39,3 +39,51 @@ int unsetenv_var(char *command, char **args, char ***env)
 
 	return (1);
 }
+
+/**
+ * delete_var - deletes a variable from the environment array
+ *
+ * @env: the environment array
+ * @indx: the index of the variable to delete
+ *
+ * Return: the modified environment array with the variable deleted
+ */
+char **delete_var(char **env, int indx)
+{
+	char **temp_env;
+	int n = 0, m;
+
+	if (env == NULL || indx < 0)
+		return (NULL);
+
+	while (env[n])
+		n++;
+
+	if (n <= indx)
+		return (NULL);
+
+	temp_env = malloc(sizeof(char *) * n);
+	if (temp_env == NULL)
+	{
+		perror("Can't allocate memory for temp_env in delete var");
+		exit(1);
+	}
+	n = 0;
+	while (n < indx)
+	{
+		temp_env[n] = env[n], env[n] = NULL;
+		n++;
+	}
+	free(env[n]), env[n] = NULL;
+
+	m = n + 1;
+	while (env[m])
+	{
+		temp_env[n++] = env[m];
+		env[m] = NULL;
+		m++;
+	}
+
+	temp_env[n] = NULL;
+	return (temp_env);
+}
