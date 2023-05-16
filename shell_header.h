@@ -64,7 +64,7 @@ int update_prev_dir(char **env);
 int update_old_pwd(char **env, char *val);
 int is_similar(char *str1, char *str2);
 char *find_env_var(char **env, char *var);
-char *get_dir_val(char *home);
+char *get_dir_val(char *var_value);
 
 
 /* Built in functions supplements*/
