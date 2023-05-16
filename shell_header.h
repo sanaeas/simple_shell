@@ -31,6 +31,7 @@ char *handle_cmnt(char *command);
 int own_execve(char **args, char **env, char *exec_file);
 
 char *own_strtok(char *str, const char *delim);
+int is_delimiter(char c, const char *delim);
 
 char *track_path(char *command, char **env);
 char *find_path(char **env);
