@@ -97,3 +97,49 @@ char *cmd_path(char *command, char *path)
 	}
 	return (NULL);
 }
+
+/**
+ * correct_path - Construct the correct path for a command within a directory
+ *
+ * @dir: The directory to add before to the command name
+ * @cmd_name: The name of the command
+ *
+ * Return: the correct path for the command
+ */
+char *correct_path(char *dir, char *cmd_name)
+{
+	char *buf;
+	int n, m, len;
+
+	if (dir == NULL || cmd_name == NULL)
+		exit(1);
+
+	len = own_strlen(dir) + own_strlen(cmd_name) + 2;
+	buf = malloc(sizeof(char) * len);
+	if (!buf)
+		exit(1);
+
+	n = 0;
+	while (dir[n])
+	{
+		buf[n] = dir[n];
+		n++;
+	}
+	buf[n++] = '/';
+	m = 0;
+	while (cmd_name[m])
+	{
+		buf[n++] = cmd_namem[m];
+		m++;
+	}
+	while (n < len)
+		buf[n++] = '\0';
+
+	if (access(buf, F_OK & X_OK) == -1)
+	{
+		free(buf);
+		buf = NULL;
+	}
+
+	return (buf);
+}
