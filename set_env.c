@@ -154,3 +154,49 @@ char **create_var(char **env, char *name, char *value)
 	temp_env[n] = varToAdd;
 	return (temp_env);
 }
+
+/**
+ * update_var - Update the value of an existing environment variable
+ *
+ * @value: The new value for the variable
+ * @env: The current environment variables
+ * @indx: The index of the variable to update
+ *
+ * Return: The modified environment variable string
+ */
+char *update_var(char *value, char **env, int indx)
+{
+	char *key;
+	char *modified;
+	int n, m;
+
+	/* Check for NULL arguments or invalid index */
+	if (value == NULL || env == NULL || indx < 0)
+		return (NULL);
+
+	/* Find the variable name for the specified index */
+	key = find_var(env[indx]);
+	if (!key)
+		exit(1);
+
+	/* Allocate memory for the modified variable string */
+	modified = malloc(sizeof(char) * own_strlen(key) + own_strlen(value) + 2);
+
+	n = 0;
+	while (key[n])
+	{
+		modified[n] = key[n];
+		n++;
+	}
+	modified[n++] = '=';
+
+	m = 0;
+	while (value[m])
+	{
+		modified[n++] = value[m];
+		m++;
+	}
+	modified[n] = '\0';
+
+	free(key);
+	return (modified);
