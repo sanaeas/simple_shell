@@ -116,3 +116,41 @@ char *find_var(char *env_var)
 	return (key);
 }
 
+/**
+ * create_var - Create a new environment variable with the specified name and value
+ *
+ * @env: The current environment variables
+ * @name: The name of the variable
+ * @value: The value of the variable
+ *
+ * Return: The updated environment variables with the new variable added
+ */
+char **create_var(char **env, char *name, char *value)
+{
+	char *varToAdd, **temp_env;
+	int n;
+
+	/* Allocate space for a temporary environment variable array */
+	temp_env = allocate_sp(env);
+	if (temp_env == NULL)
+	{
+		perror("Can't allocate space for temp_env");
+		exit(1);
+	}
+
+	/* Create a new variable string with the specified name and value */
+	varToAdd = new_varToAdd(name, value);
+	if (varToAdd == NULL)
+	{
+		perror("Can't allocate space for new_var");
+		exit(1);
+	}
+
+	/* Find the index to add the new variable */
+	n = 0;
+	while (temp_env[n])
+		n++;
+	/* Add the new variable to the temporary environment variables array */
+	temp_env[n] = varToAdd;
+	return (temp_env);
+}
