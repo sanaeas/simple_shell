@@ -77,3 +77,42 @@ int already_exist(char *var, char **env)
 	}
 	return (-1);
 }
+
+/**
+ * find_var - Find the variable name in an environment variable string
+ *
+ * @env_var: The environment variable string in the format "key=value"
+ *
+ * Return: The variable name if found, NULL otherwise
+ */
+char *find_var(char *env_var)
+{
+	char *key;
+	int n = 0, m = 0;
+
+	/* Check for NULL argument */
+	if (env_var == NULL)
+	{
+		perror("NULL argument to find variable");
+		exit(1);
+	}
+	/* Find the position of the equal sign '=' */
+	while (env_var[n] && env_var[n] != '=')
+		n++;
+
+	/* If no equal sign is found, return NULL */
+	if (!env_var[n])
+		return (NULL);
+
+	key = malloc(sizeof(char) * (n + 1));
+	/* Copy the variable name from the environment variable */
+	while (env_var[m] && env_var[m] != '=')
+	{
+		key[m] = env_var[m];
+		m++;
+	}
+	key[m] = '\0';
+
+	return (key);
+}
+
