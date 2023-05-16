@@ -37,3 +37,34 @@ char *track_path(char *command, char **env)
 
 	return (cmd);
 }
+
+/**
+ * find_path - Find the value of the PATH variable in the environment.
+ * @env: The environment variables array.
+ *
+ * Return: The value of the PATH variable, or NULL if not found.
+ */
+char *find_path(char **env)
+{
+	char *token;
+	const char *delimiter;
+	int n;
+
+	delimiter = "=";
+
+	/* Iterate through the environment variables */
+	for (n = 0; env[n]; n++)
+	{
+		/* Tokenize the variable using the delimiter "=" */
+		token = own_strtok(env[n], delimiter);
+		/* Check if the token is the "PATH" variable */
+		if (!own_strcmp("PATH", token))
+			break;
+	}
+
+	if (env[n])
+		token = own_strtok(NULL, delimiter);
+	else
+		token = NULL;
+	return (token);
+}
