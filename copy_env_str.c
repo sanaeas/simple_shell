@@ -35,3 +35,34 @@ char **cpy_env(char **env)
 	env_cpy[n] = NULL;
 	return (env_cpy);
 }
+
+/**
+ * copy_str - create a copy of a string
+ *
+ * @str: the string to be copied
+ *
+ * Return: A copy of the string
+ */
+char *copy_str(char *str)
+{
+	char *str_copy;
+	int n = 0;
+
+	if (!str)
+		return (NULL);
+
+	str_copy = malloc(sizeof(char) * (own_strlen(str) + 1));
+	if (!str_copy)
+	{
+		perror("Can't allocate memory for str copy");
+		exit(1);
+	}
+
+	while (str[n])
+	{
+		str_copy[n] = str[n];
+		n++;
+	}
+	str_copy[n] = '\0';
+	return (str_copy);
+}
