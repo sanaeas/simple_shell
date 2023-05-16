@@ -42,3 +42,28 @@ int change_dir(__attribute__((unused))char *command, char **args, char ***env)
 	return (1);
 }
 
+/**
+ * find_dir_val - Find the directory value of a specified environment variable.
+ * @env: The environment variables array.
+ * @var: The name of the environment variable to search for.
+ *
+ * Return: The directory value of the environment variable, or NULL if not found.
+ */
+char *find_dir_val(char **env, char *var)
+{
+	char *dest_dir, *var_value;
+
+	if (!env)
+		return (NULL);
+
+	/* Find the value of the specified environment variable */
+	var_value = find_env_var(env, var);
+
+	if (!var_value)
+		return (NULL);
+
+	/* Extract the directory value from the environment variable value */
+	dest_dir = get_dir_val(var_value);
+
+	return (dest_dir);
+}
