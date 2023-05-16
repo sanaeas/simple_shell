@@ -9,7 +9,7 @@
  */
 int own_strlen(char *str)
 {
-	int length = 0; 
+	int length = 0;
 
 	if (str == NULL)
 		return (0);
@@ -64,7 +64,7 @@ int own_strcmp(char *str1, char *str2)
 		str1++;
 		str2++;
 	}
-	return (*(unsigned char*)str1 - *(unsigned char*)str2);
+	return (*(unsigned char *)str1 - *(unsigned char *)str2);
 }
 
 /**
