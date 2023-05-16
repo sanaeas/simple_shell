@@ -1,0 +1,44 @@
+#include "shell_header.h"
+
+/**
+ * change_dir - Change the current working directory
+ *
+ * @command: The command name (unused)
+ * @args: The command arguments
+ * @env: The current environment variables
+ *
+ * Return: 1 on success, -1 on failure
+ */
+int change_dir(__attribute__((unused))char *command, char **args, char ***env)
+{
+	char *dir, *cwd;
+	char old[100];
+	size_t size;
+
+	/* Check if no arguments provided, change to HOME directory */
+	if (args && args[0] && !args[1])
+		dir = find_dir_val(*env, "HOME");
+	/* Check if '-' argument provided, change to OLDPWD directory */
+	else if (args && args[0] && !own_strcmp(args[1], "-") && !args[2])
+		dir = find_dir_val(*env, "OLDPWD");
+	else
+		dir = copy_str(args[1]);
+
+	size = 100;
+	cwd = getcwd(old, size);
+	if (!cwd)
+		perror("Can't get current working directory");
+	if (!dir)
+		print_err(NULL, args[0], "can't cd to OLDPWD", NULL);
+	else if (chdir(dir) == -1)
+		print_err(NULL, args[0], "can't cd to ", dir);
+	else
+	{
+		update_prev_dir(*env);
+		update_old_pwd(*env, old);
+	}
+
+	free(dir);
+	return (1);
+}
+
