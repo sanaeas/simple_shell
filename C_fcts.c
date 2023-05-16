@@ -84,3 +84,29 @@ size_t array_len(char **str)
 
 	return (len + 1);
 }
+
+/**
+ * own_atoi - Converts a string to an integer
+ *
+ * @n: The string to be converted
+ *
+ * Return: The converted integer value
+ */
+int own_atoi(char *n)
+{
+	int result = 0;
+
+	 /* Iterate through each character in the string */
+	while (*n)
+	{
+		/* Check if the character is a digit */
+		if (*n >= '0' && *n <= '9')
+		{
+			result = result * 10 + (*n - '0');
+		}
+		else
+			break;
+		n++;
+	}
+	return (result);
+}
