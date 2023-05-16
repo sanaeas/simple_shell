@@ -48,3 +48,44 @@ char *find_env_var(char **env, char *var)
 	}
 	return (NULL);
 }
+/**
+ * get_dir_val - Extract the directory value from an environment variable
+ *
+ * @var_value: the var=value pair that contains the directory
+ *
+ * Return: extracted directory value on success, NULL on failure
+ */
+char *get_dir_val(char *var_value)
+{
+	char *dest_dir;
+	int n = 0, m;
+
+	while (var_value[n])
+		n++;
+
+	dest_dir = malloc(sizeof(char) * (n - 4));
+	if (!dest_dir)
+	{
+		perror("Can't allocate memory for directory");
+		exit(1);
+	}
+
+	n = 0;
+	while (var_value[n])
+	{
+		if (var_value[n] == '=')
+			break;
+		n++;
+	}
+	m = 0;
+	n = n + 1;
+	while (var_value[n])
+	{
+		dest_dir[m++] = var_value[n];
+		n++;
+	}
+
+	dest_dir[m] = '\0';
+
+	return (dest_dir);
+}
