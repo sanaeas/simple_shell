@@ -95,3 +95,25 @@ unsigned int add_command(char *buff, char *cmd, unsigned int n)
 
 	return (n);
 }
+
+/**
+ * add_error_msg - Append an error message string into the buffer
+ *
+ * @buff: the buffer where the output string will be stored
+ * @error: the error message
+ * @n: starting index in the buffer where the error msg should be added
+ *
+ * Return: the last index of the resulting string
+ */
+unsigned int add_error_msg(char *buff, char *error, unsigned int n)
+{
+	int m = 0;
+
+	while (error[m])
+	{
+		buff[n++] = error[m];
+		m++;
+	}
+
+	return (n);
+}
