@@ -27,3 +27,24 @@ int is_similar(char *str1, char *str2)
 
 	return (0);
 }
+
+/**
+ * find_env_var - Find an environment variable in the given environment
+ *
+ * @env: the environment array to search
+ * @var: the variable to look for
+ *
+ * Return: A pointer to the environment variable if found, NULL otherwise
+ */
+char *find_env_var(char **env, char *var)
+{
+	int indx = 0;
+
+	while (env[indx])
+	{
+		if (is_similar(env[indx], var))
+			return (env[indx]);
+		indx++;
+	}
+	return (NULL);
+}
