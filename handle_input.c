@@ -27,6 +27,11 @@ char *get_cmd()
 	return (buf);
 }
 
+/**
+ * tokenize_args - Tokenizes a string into an array of arguments
+ * @buf: The string to be tokenized
+ * Return: An array of arguments (tokens)
+ */
 char **tokenize_args(char *buf)
 {
 	int n = 0;
@@ -47,8 +52,9 @@ char **tokenize_args(char *buf)
 		args[n++] = token;
 		token = own_strtok(0, delimiter);
 	}
+	/* Fill remaining array elements with NULL */
 	while (n < 1000)
-			args[n++] = NULL;
+		args[n++] = NULL;
 
 	return (args);
 }
