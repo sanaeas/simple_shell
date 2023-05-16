@@ -68,3 +68,30 @@ unsigned int print_exec_prog(char *buff, char *exec, int n)
 
 	return (indx);
 }
+
+/**
+ * add_command - add command name to the error message
+ *
+ * @buff: buffer to store output string
+ * @cmd: command name
+ * @n: starting index in the buffer where the command should be added
+ *
+ * Return: the last index of the resulting string
+ */
+unsigned int add_command(char *buff, char *cmd, unsigned int n)
+{
+	unsigned int m = 0;
+
+	if (!cmd)
+		return (n);
+
+	while (cmd[m])
+	{
+		buff[n++] = cmd[m];
+		m++;
+	}
+	buff[n++] = ':';
+	buff[n++] = ' ';
+
+	return (n);
+}
