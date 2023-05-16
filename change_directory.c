@@ -67,3 +67,63 @@ char *find_dir_val(char **env, char *var)
 
 	return (dest_dir);
 }
+
+/**
+ * update_prev_dir - Update the value of the "PWD" environment variable to the current directory.
+ * @env: The environment variables array.
+ *
+ * Return: 1 on success, -1 if "PWD" variable is not found.
+ */
+int update_prev_dir(char **env)
+{
+	char curr_dir[100], *dir;
+	size_t size = 100;
+	int i;
+
+	/* Get the current working directory */
+	getcwd(curr_dir, size);
+
+	i = 0;
+	/* Find the index of the "PWD" environment variable */
+	while (env[i])
+	{
+		if (is_similar(env[i], "PWD"))
+			break;
+		i++;
+	}
+	if (!env[i])
+		return (-1);
+
+	/* Update the value of the "PWD" variable to the current directory */
+	dir = update_var(curr_dir, env, i);
+	env[i] = dir;
+	return (1);
+}
+
+/**
+ * update_old_pwd - Update the value of the "OLDPWD" environment variable.
+ * @env: The environment variables array.
+ * @val: The new value for "OLDPWD".
+ *
+ * Return: 1 on success, -1 if "OLDPWD" variable is not found.
+ */
+int update_old_pwd(char **env, char *val)
+{
+	char *old_dir;
+	int i = 0;
+
+	while (env[i])
+	{
+		if (is_similar(env[i], "OLDPWD"))
+			break;
+		i++;
+	}
+
+	if (!env[i])
+		return (-1);
+
+	/* Update the value of the "OLDPWD" variable */
+	old_dir = update_var(val, env, i);
+	env[i] = old_dir;
+	return (1);
+}
