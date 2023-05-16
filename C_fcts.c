@@ -22,3 +22,26 @@ int own_strlen(char *str)
 
 	return (length);
 }
+
+/**
+ * own_strcpy - Copies a string
+ *
+ * @copy: The destination buffer to copy the string into
+ * @str: The source string to be copied
+ *
+ * Return: Pointer to the destination buffer
+ */
+char *own_strcpy(char *copy, char *str)
+{
+	/* Iterate through each character in the source string */
+	while (*str)
+	{
+		*copy = *str;
+		copy++;
+		str++;
+	}
+	/* Add null character at the end */
+	*copy = '\0';
+
+	return (copy);
+}
