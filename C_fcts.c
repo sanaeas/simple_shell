@@ -66,3 +66,21 @@ int own_strcmp(char *str1, char *str2)
 	}
 	return (*(unsigned char*)str1 - *(unsigned char*)str2);
 }
+
+/**
+ * array_len - Calculates the length of an array of strings
+ *
+ * @str: The array of strings
+ *
+ * Return: The length of the array
+ */
+size_t array_len(char **str)
+{
+	size_t len;
+
+	/* Iterate through the array until reaching a NULL pointer */
+	for (len = 0; str[len]; len++)
+		;
+
+	return (len + 1);
+}
