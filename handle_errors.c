@@ -43,3 +43,28 @@ void print_err(char *exec_file, char *cmd, char *error, char *text)
 	write(STDERR_FILENO, err_msg, indx);
 	free(err_msg);
 }
+
+/**
+ * print_exec_prog - add the name of the executable file to the error
+ *
+ * @buff: buffer where the output string will be stored
+ * @exec: the name of the executable file
+ * @n: error number to append to the output string
+ *
+ * Return: the last index of the resulting string
+ */
+unsigned int print_exec_prog(char *buff, char *exec, int n)
+{
+	unsigned int indx;
+
+	for (indx = 0; exec[indx]; indx++)
+		buff[indx] = exec[indx];
+
+	buff[indx++] = ':';
+	buff[indx++] = ' ';
+	buff[indx++] = n + '0';
+	buff[indx++] = ':';
+	buff[indx++] = ' ';
+
+	return (indx);
+}
