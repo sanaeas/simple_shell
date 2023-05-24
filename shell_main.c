@@ -25,10 +25,11 @@ void handleSIGINT(int signal)
  */
 int main(int argc, char **argv, char **env)
 {
-	char *command, **args;
+	char *command, **args, **envc;
 	int n = 1;
 
 	signal(SIGINT, handleSIGINT);
+	envc = cpy_env(env);
 	print_err(argv[0], NULL, NULL, NULL);
 	(void)argc;
 
@@ -38,16 +39,16 @@ int main(int argc, char **argv, char **env)
 			write(STDOUT_FILENO, "$ ", 2);
 
 		/* Extract command from the user input */
-		command = get_cmd();
+		command = get_cmd(envc);
 		/* Extract arguments from the user input */
-		args = tokenize_args(command);
+		args = tokenize_args(command, envc);
 
-		n = exec_cmd(command, args, &env, argv[0]);
+		n = exec_cmd(command, args, &envc, argv[0]);
 		if (command)
 			free(command);
 		if (args)
 			free(args);
 	}
-
+	free_array(envc);
 	return (0);
 }

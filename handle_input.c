@@ -2,9 +2,10 @@
 
 /**
  * get_cmd - Reads a line from stdin and returns it as a string
+ * @env: env var arr
  * Return: The command line entered by the user
  */
-char *get_cmd()
+char *get_cmd(__attribute__((unused))char **env)
 {
 	char *buf = NULL; /* buffer to store command line */
 	size_t n = 0;
@@ -16,6 +17,7 @@ char *get_cmd()
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "\n", 1);
 		free(buf);
+		free_array(env), env = NULL;
 		buf = NULL;
 		exit(0);
 	}
@@ -30,9 +32,10 @@ char *get_cmd()
 /**
  * tokenize_args - Tokenizes a string into an array of arguments
  * @buf: The string to be tokenized
+ * @env: env var arr
  * Return: An array of arguments (tokens)
  */
-char **tokenize_args(char *buf)
+char **tokenize_args(char *buf, __attribute__((unused))char **env)
 {
 	int n = 0;
 	const char *delimiter;

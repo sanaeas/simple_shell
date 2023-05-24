@@ -38,6 +38,7 @@ int exit_program(char *command, char **args, char ***env)
 
 	free(command);
 	free(args);
+	free_array(*env);
 	exit(n);
 	return (1);
 }

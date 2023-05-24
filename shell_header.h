@@ -22,8 +22,8 @@ typedef struct built_in
 #include <sys/wait.h>
 #include <errno.h>
 
-char *get_cmd();
-char **tokenize_args(char *buf);
+char *get_cmd(char **env);
+char **tokenize_args(char *buf, char **env);
 int exec_cmd(char *command, char **args, char ***env, char *exec_file);
 
 char *handle_cmnt(char *command);
