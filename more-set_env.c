@@ -9,16 +9,16 @@
  */
 char **allocate_sp(char **env)
 {
-	int count, n;
+	int n;
 	char **new_env;
 
 	/* Count the number of existing environment variables */
-	count = 0;
-	while (env[count])
-		count++;
+	n = 0;
+	while (env[n])
+		n++;
 
 	/* Allocate memory for the new array */
-	new_env = (char **) malloc(sizeof(char *) * (count + 2));
+	new_env = malloc(sizeof(char *) * (n + 2));
 	if (!new_env)
 		return (NULL);
 
@@ -31,8 +31,8 @@ char **allocate_sp(char **env)
 		n++;
 	}
 
-	new_env[count] = NULL;
-	new_env[count + 1] = NULL;
+	new_env[n++] = NULL;
+	new_env[n] = NULL;
 
 	return (new_env);
 }
@@ -48,7 +48,7 @@ char **allocate_sp(char **env)
 char *new_varToAdd(char *name, char *value)
 {
 	char *varToAdd;
-	int n, m;
+	size_t n, m;
 
 	varToAdd = malloc(sizeof(char) * (own_strlen(name) + own_strlen(value) + 2));
 	if (varToAdd == NULL)

@@ -27,17 +27,17 @@ int setenv_var(char *command, char **args, char ***env)
 
 	n = already_exist(args[1], *env);
 	/* If it doesn't exist, create a new var */
-	if (n == -1)
-	{
-		temp_env = create_var(*env, args[1], args[2]);
-		*env = temp_env;
-	}
-	else if (n >= 0)
+	if (n >= 0)
 	{
 		/* Update the old variable */
 		new_var = update_var(args[2], *env, n);
 		free((*env)[n]);
 		(*env)[n] = new_var;
+	}
+	else
+	{
+		temp_env = create_var(*env, args[1], args[2]);
+		*env = temp_env;
 	}
 
 	return (1);
@@ -88,7 +88,7 @@ int already_exist(char *var, char **env)
 char *find_var(char *env_var)
 {
 	char *key;
-	int n = 0, m = 0;
+	int n = 0;
 
 	/* Check for NULL argument */
 	if (env_var == NULL)
@@ -104,14 +104,15 @@ char *find_var(char *env_var)
 	if (!env_var[n])
 		return (NULL);
 
-	key = malloc(sizeof(char) * (n + 1));
+	key = malloc(sizeof(char) * (++n));
 	/* Copy the variable name from the environment variable */
-	while (env_var[m] && env_var[m] != '=')
+	n = 0;
+	while (env_var[n] && env_var[n] != '=')
 	{
-		key[m] = env_var[m];
-		m++;
+		key[n] = env_var[n];
+		n++;
 	}
-	key[m] = '\0';
+	key[n] = '\0';
 
 	return (key);
 }
