@@ -1,4 +1,18 @@
 #include "shell_header.h"
+#include <signal.h>
+
+/**
+ * handleSIGINT - Signal handler function for SIGINT (CTRL-C)
+ *
+ * @signal: interrupt integer
+ *
+ * Return: void
+ */
+void handleSIGINT(int signal)
+{
+	(void)signal;
+	write(1, "\n$ ", 3);
+}
 
 /**
  * main - simple shell entry point
@@ -14,6 +28,7 @@ int main(int argc, char **argv, char **env)
 	char *command, **args;
 	int n = 1;
 
+	signal(SIGINT, handleSIGINT);
 	print_err(argv[0], NULL, NULL, NULL);
 	(void)argc;
 
