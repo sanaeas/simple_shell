@@ -98,6 +98,7 @@ int update_prev_dir(char **env)
 
 	/* Update the value of the "PWD" variable to the current directory */
 	dir = update_var(curr_dir, env, i);
+	free(env[i]);
 	env[i] = dir;
 	return (1);
 }
@@ -126,6 +127,7 @@ int update_old_pwd(char **env, char *val)
 
 	/* Update the value of the "OLDPWD" variable */
 	old_dir = update_var(val, env, i);
+	free(env[i]);
 	env[i] = old_dir;
 	return (1);
 }

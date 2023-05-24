@@ -37,6 +37,7 @@ int setenv_var(char *command, char **args, char ***env)
 	else
 	{
 		temp_env = create_var(*env, args[1], args[2]);
+		free(*env), *env = NULL;
 		*env = temp_env;
 	}
 
