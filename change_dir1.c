@@ -15,15 +15,13 @@ int is_similar(char *str1, char *str2)
 	if (!str1 || !str2)
 		return (0);
 
-	/* Iterate through the characters of both strings */
 	while (str1[indx] != '\0' && str2[indx] != '\0')
 	{
-		/* If a character doesn't match, the strings are not similar */
 		if (str1[indx] != str2[indx])
 			return (0);
 		indx++;
 	}
-	/* Check if str1 ends with the '=' character */
+
 	if (str1[indx] == '=')
 		return (1);
 
@@ -42,15 +40,12 @@ char *find_env_var(char **env, char *var)
 {
 	int indx = 0;
 
-	/* Iterate through the array of environment variables */
 	while (env[indx])
 	{
-		/* Check if the current variable is similar to the specified variable name */
 		if (is_similar(env[indx], var))
 			return (env[indx]);
 		indx++;
 	}
-	/* Variable not found */
 	return (NULL);
 }
 /**
@@ -65,7 +60,6 @@ char *get_dir_val(char *var_value)
 	char *dest_dir;
 	int n = 0, m;
 
-	/* Calculate the length of the environment variable value */
 	while (var_value[n])
 		n++;
 
@@ -77,7 +71,6 @@ char *get_dir_val(char *var_value)
 	}
 
 	n = 0;
-	/* Find the position of the '=' character */
 	while (var_value[n])
 	{
 		if (var_value[n] == '=')
@@ -86,7 +79,6 @@ char *get_dir_val(char *var_value)
 	}
 	m = 0;
 	n = n + 1;
-	/* Extract the directory value from the environment variable */
 	while (var_value[n])
 	{
 		dest_dir[m++] = var_value[n];
