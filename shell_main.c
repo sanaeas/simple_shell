@@ -11,7 +11,8 @@
 void handleSIGINT(int signal)
 {
 	(void)signal;
-	write(1, "\n$ ", 3);
+	write(1, "\n", 1);
+	exit(EXIT_SUCCESS);
 }
 
 /**
