@@ -27,7 +27,7 @@ int unsetenv_var(char *command, char **args, char ***env)
 	}
 
 	n = already_exist(args[1], *env);
-	if (n == -1)
+	if (n < 0)
 	{
 		print_err(NULL, NULL, "Bad variable name", NULL);
 		return (1);
