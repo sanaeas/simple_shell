@@ -115,6 +115,7 @@ int update_old_pwd(char **env, char *val)
 	char *old_dir;
 	int i = 0;
 
+	/* Find the position of the "OLDPWD" variable in the environment */
 	while (env[i])
 	{
 		if (is_similar(env[i], "OLDPWD"))
